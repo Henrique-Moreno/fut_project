@@ -6,7 +6,7 @@ Repositório para o trabalho de **Construção de Software**, utilizando o padr�
 
 ## 📄 Plano de Construção
 
-Consulte o documento [`docs/Plano_de_Construcao.md`](docs/Plano_de_Construcao.md) para detalhes sobre requisitos, arquitetura e implementação.
+Consulte o documento [`docs/Plano_De_Construcao.md`](docs/Plano_de_Construcao.md) para detalhes sobre requisitos, arquitetura e implementação.
 
 ---
 
