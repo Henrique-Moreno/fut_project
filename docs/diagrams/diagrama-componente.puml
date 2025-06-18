@@ -1,0 +1,19 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam monochrome true
+
+package "FHIR Unit Test (FUT)" {
+
+  [CLI Runner] --> [Test Manager] : "executa"
+  [Test Manager] --> [TestCase Reader] : "carrega YAML"
+  [Test Manager] --> [Validator Executor] : "executa validator_cli"
+  [Test Manager] --> [Result Comparator] : "compara resultado"
+  [Test Manager] --> [Report Generator] : "gera relatório"
+
+  [TestCase Reader] --> [SnakeYAML] : "parser YAML"
+  [Validator Executor] --> [validator_cli.jar] : "invoca processo externo"
+  [Report Generator] --> [Jackson] : "serializa JSON"
+}
+
+@enduml

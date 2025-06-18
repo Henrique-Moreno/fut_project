@@ -1,0 +1,67 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam monochrome true
+
+class CliRunner {
+  +run(String[] args)
+}
+
+class TestManager {
+  -TestCaseReader reader
+  -ValidatorExecutor validator
+  -ResultComparator comparator
+  -ReportGenerator reporter
+  +executeTests(List<String> testFiles)
+}
+
+class TestCaseReader {
+  +loadTestCases(String path): List<TestCase>
+}
+
+class ValidatorExecutor {
+  +validate(TestCase): ValidationResult
+}
+
+class ResultComparator {
+  +compare(ValidationResult, ExpectedResult): ComparisonResult
+}
+
+class ReportGenerator {
+  +generate(List<ComparisonResult>): void
+}
+
+class TestCase {
+  -id: String
+  -description: String
+  -pathToInstance: String
+  -expected: ExpectedResult
+}
+
+class ExpectedResult {
+  -status: String
+  -errors: List<String>
+  -warnings: List<String>
+}
+
+class ValidationResult {
+  -status: String
+  -messages: List<String>
+}
+
+class ComparisonResult {
+  -match: boolean
+  -details: String
+}
+
+CliRunner --> TestManager
+TestManager --> TestCaseReader
+TestManager --> ValidatorExecutor
+TestManager --> ResultComparator
+TestManager --> ReportGenerator
+
+TestCaseReader --> TestCase
+TestCase --> ExpectedResult
+ValidatorExecutor --> ValidationResult
+ResultComparator --> ComparisonResult
+
+@enduml

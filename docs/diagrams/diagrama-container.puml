@@ -1,0 +1,19 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(dev, "Desenvolvedor", "Executa testes FHIR via terminal")
+
+System(fut, "FHIR Unit Test", "Valida instâncias FHIR com base em testes YAML")
+
+Container(cli, "CLI (Command Line Interface)", "Java + Spring Boot", "Executa os testes FHIR via terminal")
+Container(core, "Core Service", "Java + Spring Boot", "Gerencia leitura, execução e validação dos testes")
+ContainerDb(fs, "Filesystem", "YAML/JSON", "Armazena arquivos de teste e instâncias FHIR")
+Container(validator, "Validator CLI", "Java", "Validador externo oficial HL7")
+
+Rel(dev, cli, "Usa")
+Rel(cli, core, "Dispara testes")
+Rel(core, cli, "Retorna relatório")
+Rel(core, fs, "Lê arquivos de teste")
+Rel(core, validator, "Executa validações")
+
+@enduml
